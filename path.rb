@@ -10,14 +10,14 @@ class Path
   end
 
   def cd(new_path)
+    @current_path = @current_path.split('/').delete_if(&:empty?)
     new_path = new_path.split('/')
     if new_path[0] == ".."
       new_path.shift
-      new_path.join('/')
-      binding.pry
-      # @current_path.split('/').pop.push(new_path).join('/')
-      @current_path.chop.insert(-1, new_path)
+      @current_path.pop
+      new_path = (@current_path + new_path).join('/')
     end
+    puts new_path
   end
 
 end
